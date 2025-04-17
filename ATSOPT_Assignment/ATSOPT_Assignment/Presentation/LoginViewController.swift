@@ -124,9 +124,12 @@ final class LoginViewController: UIViewController {
         
         idTextField.delegate = self
         passwordTextField.delegate = self
+        
+        idTextField.addTarget(self, action: #selector(loginTextFieldDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(loginTextFieldDidChange), for: .editingChanged)
     }
     
-    // MARK: - Func
+    // MARK: - UISetting
     
     private func setUI() {
         view.backgroundColor = .black
@@ -192,6 +195,20 @@ final class LoginViewController: UIViewController {
         bottomStackView.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalTo(middleStackView).offset(33)
+        }
+    }
+    
+    // MARK: - Func
+    
+    @objc private func loginTextFieldDidChange() {
+        let isFilled = !(idTextField.text?.isEmpty ?? true) && !(passwordTextField.text?.isEmpty ?? true)
+        
+        if isFilled {
+            loginButton.backgroundColor = .brandColorRed
+            loginButton.setTitleColor(.white, for: .normal)
+        } else {
+            loginButton.backgroundColor = .clear
+            loginButton.setTitleColor(.gray2, for: .normal)
         }
     }
 }
