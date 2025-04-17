@@ -52,7 +52,7 @@ final class LoginViewController: UIViewController {
         btn.setTitle("로그인하기", for: .normal)
         btn.titleLabel?.font = .pretendard(size: 14, weight: .bold)
         btn.setTitleColor(.gray2, for: .normal)
-        btn.layer.borderColor = UIColor.gray.cgColor
+        btn.layer.borderColor = UIColor(named: "gray4")?.cgColor
         btn.layer.borderWidth = 1
         btn.layer.cornerRadius = 3
         return btn
@@ -121,6 +121,9 @@ final class LoginViewController: UIViewController {
         
         setUI()
         setLayout()
+        
+        idTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     // MARK: - Func
@@ -190,5 +193,19 @@ final class LoginViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(middleStackView).offset(33)
         }
+    }
+}
+
+// MARK: - extension
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor(named: "gray2")?.cgColor
+        textField.layer.borderWidth = 1
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor.clear.cgColor
+        textField.layer.borderWidth = 0
     }
 }
