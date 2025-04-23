@@ -44,6 +44,7 @@ final class LoginViewController: UIViewController {
         textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16.0, height: 0.0))
         textField.leftViewMode = .always
         textField.layer.cornerRadius = 3
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -98,6 +99,21 @@ final class LoginViewController: UIViewController {
         return btn
     }()
     
+    let secureButton: UIButton = {
+        let btn = UIButton()
+//        btn.setImage(UIImage(named: "eye-filled"), for: .normal)
+        btn.setImage(UIImage(resource: .eyeSlash), for: .selected)
+        btn.isHidden = true
+        return btn
+    }()
+    
+    lazy var allDeleteButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(resource: .xCircle), for: .normal)
+        btn.isHidden = true
+        return btn
+    }()
+    
     var middleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -121,6 +137,7 @@ final class LoginViewController: UIViewController {
         
         setUI()
         setLayout()
+        setAddTarget()
         
         idTextField.delegate = self
         passwordTextField.delegate = self
@@ -140,7 +157,9 @@ final class LoginViewController: UIViewController {
             passwordTextField,
             loginButton,
             middleStackView,
-            bottomStackView
+            bottomStackView,
+            allDeleteButton,
+            secureButton
         )
         
         middleStackView.addArrangedSubviews(
@@ -175,6 +194,16 @@ final class LoginViewController: UIViewController {
             $0.height.equalTo(52)
         }
         
+        allDeleteButton.snp.makeConstraints{
+            $0.top.equalTo(passwordTextField.snp.top).offset(18)
+            $0.trailing.equalTo(passwordTextField.snp.top).inset(20)
+        }
+        
+        secureButton.snp.makeConstraints{
+            $0.top.equalTo(passwordTextField.snp.top).offset(18)
+            $0.leading.equalTo(allDeleteButton.snp.trailing).offset(16)
+        }
+        
         loginButton.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalTo(passwordTextField.snp.bottom).offset(10)
@@ -200,7 +229,8 @@ final class LoginViewController: UIViewController {
     
     // MARK: - Func
     
-    @objc private func loginTextFieldDidChange() {
+    @objc
+    private func loginTextFieldDidChange() {
         let isFilled = !(idTextField.text?.isEmpty ?? true) && !(passwordTextField.text?.isEmpty ?? true)
         
         if isFilled {
@@ -210,6 +240,44 @@ final class LoginViewController: UIViewController {
             loginButton.backgroundColor = .clear
             loginButton.setTitleColor(.gray2, for: .normal)
         }
+    }
+    
+    @objc
+    private func togglePasswordDIdTap() {
+        passwordTextField.isSecureTextEntry.toggle()
+        
+        let isSecure = passwordTextField.isSecureTextEntry
+        
+        if isSecure {
+            secureButton.setImage(UIImage(resource: .eyeSlash), for: .normal)
+        } else {
+            secureButton.setImage(UIImage(resource: .eyeFilled), for: .normal)
+        }
+    }
+    
+    @objc
+    private func deletePasswordDidTap() {
+        passwordTextField.text = ""
+        updateButtonEnable()
+    }
+    
+    @objc
+    private func loginButtonDidTap() {
+        let welcomeViewController = WelcomeViewController()
+        welcomeViewController.welcomeTextLabel.text = 
+        navigationController?.pushViewController(welcomeViewController, animated: true)
+    }
+    
+    private func updateButtonEnable() {
+        let isPasswordFieldEmpty = passwordTextField.text?.isEmpty ?? true
+        allDeleteButton.isHidden = isPasswordFieldEmpty
+        secureButton.isHidden = isPasswordFieldEmpty
+    }
+    
+    private func setAddTarget() {
+        loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
+        allDeleteButton.addTarget(self, action: #selector(deletePasswordDidTap), for: .touchUpInside)
+        secureButton.addTarget(self, action: #selector(togglePasswordDIdTap), for: .touchUpInside)
     }
 }
 
