@@ -13,6 +13,10 @@ final class LoginViewController: UIViewController {
     
     // MARK: - Property
     
+    var nickname: String?
+    
+    let nicknameBottomSheetViewController = NicknameBottomSheetViewController()
+    
     let loginTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "TVING ID 로그인"
@@ -137,12 +141,7 @@ final class LoginViewController: UIViewController {
         setUI()
         setLayout()
         setAddTarget()
-        
-        idTextField.delegate = self
-        passwordTextField.delegate = self
-        
-        idTextField.addTarget(self, action: #selector(loginTextFieldDidChange), for: .editingChanged)
-        passwordTextField.addTarget(self, action: #selector(loginTextFieldDidChange), for: .editingChanged)
+        setDelegate()
     }
     
     // MARK: - UISetting
@@ -243,17 +242,23 @@ final class LoginViewController: UIViewController {
         allDeleteButton.addTarget(self, action: #selector(deletePasswordDidTap), for: .touchUpInside)
         secureButton.addTarget(self, action: #selector(togglePasswordDIdTap), for: .touchUpInside)
         nicknameButton.addTarget(self, action: #selector(nicknameButtonDidTap), for: .touchUpInside)
+        idTextField.addTarget(self, action: #selector(loginTextFieldDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(loginTextFieldDidChange), for: .editingChanged)
+    }
+    
+    private func setDelegate() {
+        idTextField.delegate = self
+        passwordTextField.delegate = self
+        nicknameBottomSheetViewController.nicknameDelegate = self
     }
     
     private func showSheet() {
-        let viewController = NicknameBottomSheetViewController()
-        
-        if let sheet = viewController.sheetPresentationController {
+        if let sheet = nicknameBottomSheetViewController.sheetPresentationController {
             sheet.detents = [.medium(), .medium()]
             sheet.largestUndimmedDetentIdentifier = .medium
         }
         
-        present(viewController, animated: true, completion: nil)
+        present(nicknameBottomSheetViewController, animated: true, completion: nil)
     }
     
     @objc
@@ -293,8 +298,9 @@ final class LoginViewController: UIViewController {
     @objc
     private func loginButtonDidTap() {
         let welcomeViewController = WelcomeViewController()
-        welcomeViewController.idDelegate = self
-        welcomeViewController.id = idTextField.text
+        welcomeViewController.id = nickname
+//        welcomeViewController.idDelegate = self
+//        welcomeViewController.id = idTextField.text
         navigationController?.pushViewController(welcomeViewController, animated: true)
     }
     
@@ -321,5 +327,11 @@ extension LoginViewController: UITextFieldDelegate {
 extension LoginViewController: DataBindDelegate {
     func bindID(id: String) {
         idTextField.text = id
+    }
+}
+
+extension LoginViewController: NicknameDelegate {
+    func bindNickname(nickname: String) {
+        self.nickname = nickname
     }
 }

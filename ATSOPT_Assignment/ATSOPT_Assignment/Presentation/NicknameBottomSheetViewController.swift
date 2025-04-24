@@ -9,9 +9,15 @@ import UIKit
 
 import SnapKit
 
+protocol NicknameDelegate: AnyObject {
+    func bindNickname(nickname: String)
+}
+
 final class NicknameBottomSheetViewController: UIViewController {
     
     // MARK: - Property
+    
+    weak var nicknameDelegate: NicknameDelegate?
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -50,6 +56,7 @@ final class NicknameBottomSheetViewController: UIViewController {
         
         setUI()
         setLayout()
+        addTarget()
     }
     
     // MARK: - UISetting
@@ -88,11 +95,13 @@ final class NicknameBottomSheetViewController: UIViewController {
     // MARK: - Func
     
     private func addTarget() {
-        
+        saveButton.addTarget(self, action: #selector (saveButtonDidTap), for: .touchUpInside)
     }
     
     @objc
     private func saveButtonDidTap() {
-        
+        let nickname = nickNameTextField.text ?? ""
+        nicknameDelegate?.bindNickname(nickname: nickname)
+        dismiss(animated: true)
     }
 }
