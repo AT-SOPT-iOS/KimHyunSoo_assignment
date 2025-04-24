@@ -9,9 +9,17 @@ import UIKit
 
 import SnapKit
 
+protocol DataBindDelegate: AnyObject {
+    func bindID(id: String)
+}
+
 class WelcomeViewController: UIViewController {
     
     // MARK: - Property
+    
+    var id: String?
+    
+    weak var idDelegate: DataBindDelegate?
     
     let tvingImageView: UIImageView = {
         let imageView = UIImageView()
@@ -19,10 +27,12 @@ class WelcomeViewController: UIViewController {
         return imageView
     }()
     
-    var welcomeTextLabel: UILabel = {
+    lazy var welcomeTextLabel: UILabel = {
         let label = UILabel()
-        label.font = .pretendard(size: 15, weight: .bold)
+        label.font = .pretendard(size: 23, weight: .bold)
         label.numberOfLines = 2
+        label.textColor = .white
+        label.textAlignment = .center
         return label
     }()
     
@@ -43,6 +53,7 @@ class WelcomeViewController: UIViewController {
         
         setUI()
         setLayout()
+        bindID()
     }
     
     // MARK: - UISetting
@@ -60,6 +71,8 @@ class WelcomeViewController: UIViewController {
     private func setLayout() {
         tvingImageView.snp.makeConstraints{
             $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(210)
+            $0.width.equalToSuperview()
         }
         
         welcomeTextLabel.snp.makeConstraints{
@@ -68,7 +81,7 @@ class WelcomeViewController: UIViewController {
         }
         
         mainButton.snp.makeConstraints{
-            $0.bottom.equalToSuperview().inset(10)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(335)
             $0.height.equalTo(52)
@@ -78,11 +91,23 @@ class WelcomeViewController: UIViewController {
     // MARK: - Func
     
     private func bindID() {
-        
+        if let id = self.id, !id.isEmpty {
+            self.welcomeTextLabel.text = "\(id)님 \n반가워요!"
+        } else {
+            self.welcomeTextLabel.text = "로그인을 해주세요!"
+        }
     }
     
     @objc
     private func backToLoginButtonDidTap() {
-        navigationController?.popToRootViewController(animated: true)
+        if let id = id {
+            idDelegate?.bindID(id: id)
+        }
+        
+        if self.navigationController == nil {
+            self.dismiss(animated: true)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
