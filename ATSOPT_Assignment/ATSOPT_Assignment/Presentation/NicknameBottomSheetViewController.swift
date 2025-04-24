@@ -19,7 +19,7 @@ final class NicknameBottomSheetViewController: UIViewController {
     
     weak var nicknameDelegate: NicknameDelegate?
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 23, weight: .medium)
         label.textColor = .black
@@ -28,7 +28,7 @@ final class NicknameBottomSheetViewController: UIViewController {
         return label
     }()
     
-    var nickNameTextField: UITextField = {
+    private let nicknameTextField: UITextField = {
        let textField = UITextField()
         textField.textColor = .black
         textField.font = .systemFont(ofSize: 14, weight: .medium)
@@ -39,7 +39,17 @@ final class NicknameBottomSheetViewController: UIViewController {
         return textField
     }()
     
-    let saveButton: UIButton = {
+    private let nicknameWarningLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.textColor = .brandColorRed
+        label.textAlignment = .center
+        label.text = "한글만 사용 가능합니다."
+        label.isHidden = true
+        return label
+    }()
+    
+    private let saveButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("저장하기", for: .normal)
         btn.titleLabel?.font = .pretendard(size: 14, weight: .medium)
@@ -67,7 +77,8 @@ final class NicknameBottomSheetViewController: UIViewController {
         
         self.view.addSubviews(
             titleLabel,
-            nickNameTextField,
+            nicknameTextField,
+            nicknameWarningLabel,
             saveButton
         )
     }
@@ -78,11 +89,16 @@ final class NicknameBottomSheetViewController: UIViewController {
             $0.leading.equalToSuperview().inset(20)
         }
         
-        nickNameTextField.snp.makeConstraints{
+        nicknameTextField.snp.makeConstraints{
             $0.top.equalTo(titleLabel.snp.bottom).offset(21)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(335)
             $0.height.equalTo(52)
+        }
+        
+        nicknameWarningLabel.snp.makeConstraints{
+            $0.top.equalTo(nicknameTextField.snp.bottom).offset(5)
+            $0.leading.equalTo(nicknameTextField.snp.leading)
         }
         
         saveButton.snp.makeConstraints{
@@ -96,25 +112,32 @@ final class NicknameBottomSheetViewController: UIViewController {
     // MARK: - Func
     
     private func addTarget() {
-        nickNameTextField.addTarget(self, action: #selector(nickNameTextFieldDidChange), for: .editingChanged)
+        nicknameTextField.addTarget(self, action: #selector(nickNameTextFieldDidChange), for: .editingChanged)
         saveButton.addTarget(self, action: #selector (saveButtonDidTap), for: .touchUpInside)
     }
     
     @objc
     private func nickNameTextFieldDidChange() {
-        if !(nickNameTextField.text?.isEmpty ?? true) {
+        let text = nicknameTextField.text ?? ""
+        let isFilled = !text.isEmpty
+        let isValidNickname = text.isKorean
+        
+        nicknameWarningLabel.isHidden = isValidNickname || !isFilled ? true : false
+
+        if isFilled && isValidNickname {
             saveButton.backgroundColor = .brandColorRed
             saveButton.setTitleColor(.white, for: .normal)
             saveButton.layer.borderColor = UIColor.clear.cgColor
         } else {
             saveButton.backgroundColor = .clear
             saveButton.setTitleColor(.gray2, for: .normal)
+            saveButton.layer.borderColor = UIColor(named: "gray4")?.cgColor
         }
     }
     
     @objc
     private func saveButtonDidTap() {
-        let nickname = nickNameTextField.text ?? ""
+        let nickname = nicknameTextField.text ?? ""
         nicknameDelegate?.bindNickname(nickname: nickname)
         dismiss(animated: true)
     }

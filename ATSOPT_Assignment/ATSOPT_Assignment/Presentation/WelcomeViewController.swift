@@ -21,13 +21,13 @@ final class WelcomeViewController: UIViewController {
     
     weak var idDelegate: DataBindDelegate?
     
-    let tvingImageView: UIImageView = {
+    private let tvingImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(resource: .tving)
         return imageView
     }()
     
-    lazy var welcomeTextLabel: UILabel = {
+    private let welcomeTextLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(size: 23, weight: .bold)
         label.numberOfLines = 2
@@ -36,7 +36,7 @@ final class WelcomeViewController: UIViewController {
         return label
     }()
     
-    let mainButton: UIButton = {
+    private lazy var mainButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .brandColorRed
         button.setTitleColor(.white, for: .normal)

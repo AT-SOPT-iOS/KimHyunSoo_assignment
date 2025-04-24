@@ -14,4 +14,10 @@ extension String {
         let predicate = NSPredicate(format: "SELF MATCHES %@", regularExpression)
         return predicate.evaluate(with: self)
     }
+    
+    var isKorean: Bool {
+        let regularExpression = "^[가-힣ㄱ-ㅎㅏ-ㅣ]{2,8}$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regularExpression)
+        return predicate.evaluate(with: self)
+    }
 }

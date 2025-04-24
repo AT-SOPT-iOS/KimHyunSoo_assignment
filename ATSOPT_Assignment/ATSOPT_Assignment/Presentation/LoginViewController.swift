@@ -17,7 +17,7 @@ final class LoginViewController: UIViewController {
     
     let nicknameBottomSheetViewController = NicknameBottomSheetViewController()
     
-    let loginTitleLabel: UILabel = {
+    private let loginTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "TVING ID 로그인"
         label.textColor = .white
@@ -25,7 +25,7 @@ final class LoginViewController: UIViewController {
         return label
     }()
     
-    var idTextField: UITextField = {
+    private let idTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "아이디"
         textField.setPlaceholderColor(.gray2)
@@ -38,7 +38,7 @@ final class LoginViewController: UIViewController {
         return textField
     }()
     
-    let idWarningLabel: UILabel = {
+    private let idWarningLabel: UILabel = {
         let label = UILabel()
         label.text = "올바른 이메일 형식을 입력해주세요."
         label.textColor = .brandColorRed
@@ -47,7 +47,7 @@ final class LoginViewController: UIViewController {
         return label
     }()
     
-    var passwordTextField: UITextField = {
+    private let passwordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "비밀번호"
         textField.setPlaceholderColor(.gray2)
@@ -61,7 +61,7 @@ final class LoginViewController: UIViewController {
         return textField
     }()
     
-    let loginButton: UIButton = {
+    private let loginButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("로그인하기", for: .normal)
         btn.titleLabel?.font = .pretendard(size: 14, weight: .bold)
@@ -72,7 +72,7 @@ final class LoginViewController: UIViewController {
         return btn
     }()
     
-    let findIDLabel: UILabel = {
+    private let findIDLabel: UILabel = {
         let label = UILabel()
         label.text = "아이디 찾기"
         label.font = .pretendard(size: 14, weight: .bold)
@@ -80,7 +80,7 @@ final class LoginViewController: UIViewController {
         return label
     }()
     
-    let findPasswordLabel: UILabel = {
+    private let findPasswordLabel: UILabel = {
         let label = UILabel()
         label.text = "비밀번호 찾기"
         label.font = .pretendard(size: 14, weight: .bold)
@@ -88,13 +88,13 @@ final class LoginViewController: UIViewController {
         return label
     }()
     
-    let barView: UIView = {
+    private let barView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray4
         return view
     }()
     
-    let signUpLabel: UILabel = {
+    private let signUpLabel: UILabel = {
         let label = UILabel()
         label.text = "아직 계정이 없으신가요?"
         label.font = .pretendard(size: 14, weight: .bold)
@@ -102,7 +102,7 @@ final class LoginViewController: UIViewController {
         return label
     }()
     
-    let nicknameButton: UIButton = {
+    private let nicknameButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("닉네임 만들러가기", for: .normal)
         btn.titleLabel?.font = .pretendard(size: 14, weight: .regular)
@@ -112,21 +112,21 @@ final class LoginViewController: UIViewController {
         return btn
     }()
     
-    let secureButton: UIButton = {
+    private let secureButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(resource: .eyeSlash), for: .normal)
         btn.isHidden = true
         return btn
     }()
     
-    lazy var allDeleteButton: UIButton = {
+    private let allDeleteButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(resource: .xCircle), for: .normal)
         btn.isHidden = true
         return btn
     }()
     
-    var middleStackView: UIStackView = {
+    private var middleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
@@ -134,7 +134,7 @@ final class LoginViewController: UIViewController {
         return stackView
     }()
     
-    var bottomStackView: UIStackView = {
+    private var bottomStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
@@ -317,8 +317,6 @@ final class LoginViewController: UIViewController {
     private func loginButtonDidTap() {
         let welcomeViewController = WelcomeViewController()
         welcomeViewController.id = nickname
-//        welcomeViewController.idDelegate = self
-//        welcomeViewController.id = idTextField.text
         navigationController?.pushViewController(welcomeViewController, animated: true)
     }
     
