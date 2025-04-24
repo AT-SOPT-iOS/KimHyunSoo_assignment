@@ -43,9 +43,10 @@ final class NicknameBottomSheetViewController: UIViewController {
         let btn = UIButton()
         btn.setTitle("저장하기", for: .normal)
         btn.titleLabel?.font = .pretendard(size: 14, weight: .medium)
-        btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = .brandColorRed
+        btn.setTitleColor(.gray2, for: .normal)
         btn.layer.cornerRadius = 12
+        btn.layer.borderWidth = 1
+        btn.layer.borderColor = UIColor(named: "gray4")?.cgColor
         return btn
     }()
     
@@ -95,7 +96,20 @@ final class NicknameBottomSheetViewController: UIViewController {
     // MARK: - Func
     
     private func addTarget() {
+        nickNameTextField.addTarget(self, action: #selector(nickNameTextFieldDidChange), for: .editingChanged)
         saveButton.addTarget(self, action: #selector (saveButtonDidTap), for: .touchUpInside)
+    }
+    
+    @objc
+    private func nickNameTextFieldDidChange() {
+        if !(nickNameTextField.text?.isEmpty ?? true) {
+            saveButton.backgroundColor = .brandColorRed
+            saveButton.setTitleColor(.white, for: .normal)
+            saveButton.layer.borderColor = UIColor.clear.cgColor
+        } else {
+            saveButton.backgroundColor = .clear
+            saveButton.setTitleColor(.gray2, for: .normal)
+        }
     }
     
     @objc
