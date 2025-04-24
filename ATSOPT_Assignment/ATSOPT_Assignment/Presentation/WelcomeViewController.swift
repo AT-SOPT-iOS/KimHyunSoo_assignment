@@ -13,7 +13,7 @@ protocol DataBindDelegate: AnyObject {
     func bindID(id: String)
 }
 
-class WelcomeViewController: UIViewController {
+final class WelcomeViewController: UIViewController {
     
     // MARK: - Property
     

@@ -232,6 +232,30 @@ final class LoginViewController: UIViewController {
     
     // MARK: - Func
     
+    private func updateButtonEnable() {
+        let isPasswordFieldEmpty = passwordTextField.text?.isEmpty ?? true
+        allDeleteButton.isHidden = isPasswordFieldEmpty
+        secureButton.isHidden = isPasswordFieldEmpty
+    }
+    
+    private func setAddTarget() {
+        loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
+        allDeleteButton.addTarget(self, action: #selector(deletePasswordDidTap), for: .touchUpInside)
+        secureButton.addTarget(self, action: #selector(togglePasswordDIdTap), for: .touchUpInside)
+        nicknameButton.addTarget(self, action: #selector(nicknameButtonDidTap), for: .touchUpInside)
+    }
+    
+    private func showSheet() {
+        let viewController = NicknameBottomSheetViewController()
+        
+        if let sheet = viewController.sheetPresentationController {
+            sheet.detents = [.medium(), .medium()]
+            sheet.largestUndimmedDetentIdentifier = .medium
+        }
+        
+        present(viewController, animated: true, completion: nil)
+    }
+    
     @objc
     private func loginTextFieldDidChange() {
         let isFilled = !(idTextField.text?.isEmpty ?? true) && !(passwordTextField.text?.isEmpty ?? true)
@@ -274,16 +298,9 @@ final class LoginViewController: UIViewController {
         navigationController?.pushViewController(welcomeViewController, animated: true)
     }
     
-    private func updateButtonEnable() {
-        let isPasswordFieldEmpty = passwordTextField.text?.isEmpty ?? true
-        allDeleteButton.isHidden = isPasswordFieldEmpty
-        secureButton.isHidden = isPasswordFieldEmpty
-    }
-    
-    private func setAddTarget() {
-        loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
-        allDeleteButton.addTarget(self, action: #selector(deletePasswordDidTap), for: .touchUpInside)
-        secureButton.addTarget(self, action: #selector(togglePasswordDIdTap), for: .touchUpInside)
+    @objc
+    private func nicknameButtonDidTap() {
+        showSheet()
     }
 }
 
