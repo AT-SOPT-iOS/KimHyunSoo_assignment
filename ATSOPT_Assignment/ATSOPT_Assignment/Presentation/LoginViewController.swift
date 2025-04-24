@@ -101,8 +101,7 @@ final class LoginViewController: UIViewController {
     
     let secureButton: UIButton = {
         let btn = UIButton()
-//        btn.setImage(UIImage(named: "eye-filled"), for: .normal)
-        btn.setImage(UIImage(resource: .eyeSlash), for: .selected)
+        btn.setImage(UIImage(resource: .eyeSlash), for: .normal)
         btn.isHidden = true
         return btn
     }()
@@ -194,14 +193,18 @@ final class LoginViewController: UIViewController {
             $0.height.equalTo(52)
         }
         
-        allDeleteButton.snp.makeConstraints{
-            $0.top.equalTo(passwordTextField.snp.top).offset(18)
-            $0.trailing.equalTo(passwordTextField.snp.top).inset(20)
-        }
-        
         secureButton.snp.makeConstraints{
             $0.top.equalTo(passwordTextField.snp.top).offset(18)
-            $0.leading.equalTo(allDeleteButton.snp.trailing).offset(16)
+            $0.trailing.equalTo(passwordTextField.snp.trailing).offset(-20)
+            $0.width.equalTo(20)
+            $0.height.equalTo(20)
+        }
+        
+        allDeleteButton.snp.makeConstraints{
+            $0.top.equalTo(passwordTextField.snp.top).offset(18)
+            $0.trailing.equalTo(secureButton.snp.leading).offset(-16)
+            $0.width.equalTo(20)
+            $0.height.equalTo(20)
         }
         
         loginButton.snp.makeConstraints{
@@ -240,6 +243,8 @@ final class LoginViewController: UIViewController {
             loginButton.backgroundColor = .clear
             loginButton.setTitleColor(.gray2, for: .normal)
         }
+        
+        updateButtonEnable()
     }
     
     @objc
@@ -264,7 +269,8 @@ final class LoginViewController: UIViewController {
     @objc
     private func loginButtonDidTap() {
         let welcomeViewController = WelcomeViewController()
-        welcomeViewController.welcomeTextLabel.text = 
+        welcomeViewController.idDelegate = self
+        welcomeViewController.id = idTextField.text
         navigationController?.pushViewController(welcomeViewController, animated: true)
     }
     
@@ -292,5 +298,11 @@ extension LoginViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.layer.borderColor = UIColor.clear.cgColor
         textField.layer.borderWidth = 0
+    }
+}
+
+extension LoginViewController: DataBindDelegate {
+    func bindID(id: String) {
+        idTextField.text = id
     }
 }
