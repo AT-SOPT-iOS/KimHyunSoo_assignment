@@ -38,6 +38,15 @@ final class LoginViewController: UIViewController {
         return textField
     }()
     
+    let idWarningLabel: UILabel = {
+        let label = UILabel()
+        label.text = "올바른 이메일 형식을 입력해주세요."
+        label.textColor = .brandColorRed
+        label.font = .pretendard(size: 12, weight: .regular)
+        label.isHidden = true
+        return label
+    }()
+    
     var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "비밀번호"
@@ -152,6 +161,7 @@ final class LoginViewController: UIViewController {
         self.view.addSubviews(
             loginTitleLabel,
             idTextField,
+            idWarningLabel,
             passwordTextField,
             loginButton,
             middleStackView,
@@ -185,9 +195,14 @@ final class LoginViewController: UIViewController {
             $0.height.equalTo(52)
         }
         
+        idWarningLabel.snp.makeConstraints{
+            $0.top.equalTo(idTextField.snp.bottom).offset(5)
+            $0.leading.equalTo(idTextField.snp.leading)
+        }
+        
         passwordTextField.snp.makeConstraints{
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(idTextField.snp.bottom).offset(5)
+            $0.top.equalTo(idTextField.snp.bottom).offset(20)
             $0.width.equalTo(335)
             $0.height.equalTo(52)
         }
@@ -265,7 +280,10 @@ final class LoginViewController: UIViewController {
     private func loginTextFieldDidChange() {
         let isFilled = !(idTextField.text?.isEmpty ?? true) && !(passwordTextField.text?.isEmpty ?? true)
         
-        if isFilled {
+        let isValidEmail = idTextField.text?.isValidEmail ?? false
+        idWarningLabel.isHidden = isValidEmail && !idTextField.text!.isEmpty
+        
+        if isFilled && isValidEmail {
             loginButton.backgroundColor = .brandColorRed
             loginButton.setTitleColor(.white, for: .normal)
         } else {
