@@ -5,11 +5,10 @@
 - 내용 1
 - 내용 2
 
+## 📚 Learning
+- 1
+- 2
 
 ## 📸 Screenshot
 
 ## 💭 To Reviewers
-
-## 📚 Reference
-- 1
-- 2
