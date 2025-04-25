@@ -269,8 +269,9 @@ final class LoginViewController: UIViewController {
     
     private func showSheet() {
         if let sheet = nicknameBottomSheetViewController.sheetPresentationController {
-            sheet.detents = [.medium(), .medium()]
+            sheet.detents = [.medium()]
             sheet.largestUndimmedDetentIdentifier = .medium
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
         }
         
         present(nicknameBottomSheetViewController, animated: true, completion: nil)
