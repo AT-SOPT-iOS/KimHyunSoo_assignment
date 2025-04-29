@@ -21,7 +21,7 @@ final class LoginViewController: UIViewController {
         let label = UILabel()
         label.text = "TVING ID 로그인"
         label.textColor = .white
-        label.font = .pretendard(size: 23, weight: .regular)
+        label.font = .pretendard(.pretendardRegular, size: 23)
         return label
     }()
     
@@ -31,7 +31,7 @@ final class LoginViewController: UIViewController {
         textField.setPlaceholderColor(.gray2)
         textField.textColor = .gray2
         textField.backgroundColor = .gray4
-        textField.font = .pretendard(size: 15, weight: .bold)
+        textField.font = .pretendard(.pretendardBold, size: 15)
         textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16.0, height: 0.0))
         textField.leftViewMode = .always
         textField.layer.cornerRadius = 3
@@ -42,7 +42,7 @@ final class LoginViewController: UIViewController {
         let label = UILabel()
         label.text = "올바른 이메일 형식을 입력해주세요."
         label.textColor = .brandColorRed
-        label.font = .pretendard(size: 12, weight: .regular)
+        label.font = .pretendard(.pretendardRegular, size: 12)
         label.isHidden = true
         return label
     }()
@@ -53,7 +53,7 @@ final class LoginViewController: UIViewController {
         textField.setPlaceholderColor(.gray2)
         textField.textColor = .gray2
         textField.backgroundColor = .gray4
-        textField.font = .pretendard(size: 15, weight: .bold)
+        textField.font = .pretendard(.pretendardBold, size: 15)
         textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16.0, height: 0.0))
         textField.leftViewMode = .always
         textField.layer.cornerRadius = 3
@@ -64,7 +64,7 @@ final class LoginViewController: UIViewController {
     private let loginButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("로그인하기", for: .normal)
-        btn.titleLabel?.font = .pretendard(size: 14, weight: .bold)
+        btn.titleLabel?.font = .pretendard(.pretendardBold, size: 14)
         btn.setTitleColor(.gray2, for: .normal)
         btn.layer.borderColor = UIColor(named: "gray4")?.cgColor
         btn.layer.borderWidth = 1
@@ -75,7 +75,7 @@ final class LoginViewController: UIViewController {
     private let findIDLabel: UILabel = {
         let label = UILabel()
         label.text = "아이디 찾기"
-        label.font = .pretendard(size: 14, weight: .bold)
+        label.font = .pretendard(.pretendardBold, size: 14)
         label.textColor = .gray2
         return label
     }()
@@ -83,7 +83,7 @@ final class LoginViewController: UIViewController {
     private let findPasswordLabel: UILabel = {
         let label = UILabel()
         label.text = "비밀번호 찾기"
-        label.font = .pretendard(size: 14, weight: .bold)
+        label.font = .pretendard(.pretendardBold, size: 14)
         label.textColor = .gray2
         return label
     }()
@@ -97,7 +97,7 @@ final class LoginViewController: UIViewController {
     private let signUpLabel: UILabel = {
         let label = UILabel()
         label.text = "아직 계정이 없으신가요?"
-        label.font = .pretendard(size: 14, weight: .bold)
+        label.font = .pretendard(.pretendardBold, size: 14)
         label.textColor = .gray3
         return label
     }()
@@ -105,7 +105,7 @@ final class LoginViewController: UIViewController {
     private let nicknameButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("닉네임 만들러가기", for: .normal)
-        btn.titleLabel?.font = .pretendard(size: 14, weight: .regular)
+        btn.titleLabel?.font = .pretendard(.pretendardRegular, size: 14)
         btn.setTitleColor(.gray2, for: .normal)
         btn.backgroundColor = .none
         btn.setUnderline()

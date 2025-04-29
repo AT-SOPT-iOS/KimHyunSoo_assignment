@@ -7,22 +7,14 @@
 
 import UIKit
 
+enum FontName: String {
+    case pretendardRegular = "Pretendard-Regular"
+    case pretendardMedium = "Pretendard-Medium"
+    case pretendardBold = "Pretendard-Bold"
+}
+
 extension UIFont {
-    static func pretendard(size fontSize: CGFloat, weight: UIFont.Weight) -> UIFont {
-            let familyName = "Pretendard"
-
-            var weightString: String
-            switch weight {
-            case .bold:
-                weightString = "Blod"
-            case .medium:
-                weightString = "Medium"
-            case .regular:
-                weightString = "Regular"
-            default:
-                weightString = "Regular"
-            }
-
-            return UIFont(name: "\(familyName)-\(weightString)", size: fontSize) ?? .systemFont(ofSize: fontSize, weight: weight)
-        }
+    static func pretendard(_ weight: FontName, size: CGFloat) -> UIFont {
+        return UIFont(name: weight.rawValue, size: size) ?? .systemFont(ofSize: size)
+    }
 }

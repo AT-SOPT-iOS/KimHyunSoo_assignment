@@ -52,7 +52,7 @@ final class NicknameBottomSheetViewController: UIViewController {
     private let saveButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("저장하기", for: .normal)
-        btn.titleLabel?.font = .pretendard(size: 14, weight: .medium)
+        btn.titleLabel?.font = .pretendard(.pretendardMedium, size: 14)
         btn.setTitleColor(.gray2, for: .normal)
         btn.layer.cornerRadius = 12
         btn.layer.borderWidth = 1
