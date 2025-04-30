@@ -35,6 +35,12 @@ final class TabBarView: BaseView {
                 [.foregroundColor: UIColor.white, .font: UIFont.pretendard(.pretendardMedium, size: 17)],
                 for: .normal
             )
+            $0.setDividerImage(
+                UIImage(),
+                forLeftSegmentState: .normal,
+                rightSegmentState: .normal,
+                barMetrics: .default
+            )
         }
         
         underLineView.do {
