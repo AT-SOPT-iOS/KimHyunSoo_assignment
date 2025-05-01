@@ -21,6 +21,11 @@ final class NoticeView: BaseView {
     // MARK: - UISetting
     
     override func setStyle() {
+        self.do {
+            $0.backgroundColor = .gray4
+            $0.layer.cornerRadius = 5
+        }
+        
         titleLabel.do {
             $0.text = "티빙 계정 공유 정책 추가 안내"
             $0.font = .pretendard(.pretendardMedium, size: 11)
@@ -39,8 +44,6 @@ final class NoticeView: BaseView {
     }
     
     override func setUI() {
-        self.backgroundColor = .gray4
-        
         addSubviews(
             titleLabel,
             noticeLabel,
@@ -50,17 +53,17 @@ final class NoticeView: BaseView {
     
     override func setLayout() {
         noticeLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().inset(16)
+            $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(17)
         }
         
         titleLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().inset(16)
+            $0.centerY.equalToSuperview()
             $0.leading.equalTo(noticeLabel.snp.trailing).offset(8)
         }
         
         nextButton.snp.makeConstraints{
-            $0.top.equalToSuperview().inset(16)
+            $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(16)
             $0.size.equalTo(18)
         }

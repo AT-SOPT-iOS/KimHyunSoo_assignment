@@ -21,6 +21,9 @@ final class BaseballView: BaseView {
     // MARK: - UISetting
     
     override func setStyle() {
+        self.do {
+            $0.backgroundColor = .clear
+        }
         collectionView.do {
             $0.backgroundColor = .clear
             $0.isScrollEnabled = true
@@ -29,7 +32,6 @@ final class BaseballView: BaseView {
     }
     
     override func setUI() {
-        self.backgroundColor = .clear
         register()
         setCollectionViewLayout()
         

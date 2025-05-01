@@ -35,14 +35,8 @@ final class MainView: BaseView {
     let searchButton = UIButton()
     let smallLogoButton = UIButton()
     let mainMovieImageView = UIImageView()
-    let askingLabel = UILabel()
-    let termsLabel = UILabel()
-    let privacyLabel = UILabel()
-    let licenseLabel = UILabel()
-    let recruitLabel = UILabel()
-    let dotLabel1 = UILabel()
-    let dotLabel2 = UILabel()
-    let dotLabel3 = UILabel()
+    
+    private let footerView = MainFooterView()
     
     // MARK: - UISetting
     
@@ -72,42 +66,6 @@ final class MainView: BaseView {
         mainMovieImageView.do {
             $0.image = .whatSurname
         }
-        
-        askingLabel.do {
-            $0.text = "고객문의"
-            $0.font = .pretendard(.pretendardMedium, size: 11)
-            $0.textColor = .gray2
-        }
-        
-        termsLabel.do {
-            $0.text = "이용약관"
-            $0.font = .pretendard(.pretendardMedium, size: 11)
-            $0.textColor = .gray2
-        }
-        
-        privacyLabel.do {
-            $0.text = "개인정보처리방침"
-            $0.font = .pretendard(.pretendardMedium, size: 11)
-            $0.textColor = .white
-        }
-        
-        licenseLabel.do {
-            $0.text = "사업자정보"
-            $0.font = .pretendard(.pretendardMedium, size: 11)
-            $0.textColor = .gray2
-        }
-        
-        recruitLabel.do {
-            $0.text = "인재채용"
-            $0.font = .pretendard(.pretendardMedium, size: 11)
-            $0.textColor = .gray2
-        }
-        
-        [dotLabel1, dotLabel2, dotLabel3].forEach {
-            $0.text = "·"
-            $0.font = .pretendard(.pretendardMedium, size: 11)
-            $0.textColor = .gray2
-        }
     }
     
     override func setUI() {
@@ -125,14 +83,7 @@ final class MainView: BaseView {
             sponsorView,
             khLifeView,
             noticeView,
-            askingLabel,
-            termsLabel,
-            privacyLabel,
-            licenseLabel,
-            recruitLabel,
-            dotLabel1,
-            dotLabel2,
-            dotLabel3
+            footerView
         )
         headerStackView.addArrangedSubviews(
             searchButton,
@@ -222,47 +173,13 @@ final class MainView: BaseView {
         noticeView.snp.makeConstraints{
             $0.top.equalTo(khLifeView.snp.bottom).offset(23)
             $0.horizontalEdges.equalToSuperview().inset(14)
+            $0.height.equalTo(50)
         }
         
-        askingLabel.snp.makeConstraints{
+        footerView.snp.makeConstraints{
             $0.top.equalTo(noticeView.snp.bottom).offset(13)
-            $0.leading.equalToSuperview().inset(20)
-        }
-        
-        dotLabel1.snp.makeConstraints{
-            $0.top.equalTo(noticeView.snp.bottom).offset(21)
-            $0.leading.equalTo(askingLabel.snp.trailing).offset(3)
-        }
-        
-        termsLabel.snp.makeConstraints{
-            $0.top.equalTo(noticeView.snp.bottom).offset(13)
-            $0.leading.equalTo(dotLabel1.snp.trailing).offset(3)
-        }
-        
-        dotLabel2.snp.makeConstraints{
-            $0.top.equalTo(noticeView.snp.bottom).offset(21)
-            $0.leading.equalTo(termsLabel.snp.trailing).offset(3)
-        }
-        
-        privacyLabel.snp.makeConstraints{
-            $0.top.equalTo(noticeView.snp.bottom).offset(13)
-            $0.leading.equalTo(dotLabel2.snp.trailing).offset(3)
-        }
-        
-        licenseLabel.snp.makeConstraints{
-            $0.top.equalTo(askingLabel.snp.bottom)
-            $0.leading.equalToSuperview().inset(20)
-        }
-        
-        dotLabel3.snp.makeConstraints{
-            $0.top.equalTo(termsLabel.snp.bottom).offset(8)
-            $0.leading.equalTo(licenseLabel.snp.trailing).offset(3)
-        }
-        
-        recruitLabel.snp.makeConstraints{
-            $0.top.equalTo(termsLabel.snp.bottom).offset(8)
-            $0.leading.equalTo(dotLabel3.snp.trailing).offset(3)
-            $0.bottom.equalToSuperview().inset(99)
+            $0.leading.equalTo(noticeView.snp.leading)
+            $0.bottom.equalToSuperview().inset(10)
         }
     }
 }
