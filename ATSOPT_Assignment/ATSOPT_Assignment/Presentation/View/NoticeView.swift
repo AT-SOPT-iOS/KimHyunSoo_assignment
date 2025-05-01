@@ -39,6 +39,8 @@ final class NoticeView: BaseView {
     }
     
     override func setUI() {
+        self.backgroundColor = .gray4
+        
         addSubviews(
             titleLabel,
             noticeLabel,
@@ -60,6 +62,7 @@ final class NoticeView: BaseView {
         nextButton.snp.makeConstraints{
             $0.top.equalToSuperview().inset(16)
             $0.trailing.equalToSuperview().inset(16)
+            $0.size.equalTo(18)
         }
     }
 }

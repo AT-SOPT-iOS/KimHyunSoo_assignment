@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "hesmine.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "tvingLogo.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
