@@ -18,8 +18,6 @@ final class MainView: BaseView {
     
     let contentView = UIView()
     
-    let headerStackView = UIStackView()
-    
     let tabBarView = TabBarView()
     
     let todayTvingView = TodayTvingView()
@@ -28,12 +26,8 @@ final class MainView: BaseView {
     let baseballView = BaseballView()
     let sponsorView = SponsorView()
     let khLifeView = KHLifeView()
-    
     let noticeView = NoticeView()
-    
-    let logoImageView = UIImageView()
-    let searchButton = UIButton()
-    let smallLogoButton = UIButton()
+
     let mainMovieImageView = UIImageView()
     
     private let footerView = MainFooterView()
@@ -45,24 +39,6 @@ final class MainView: BaseView {
             $0.backgroundColor = .clear
         }
         
-        logoImageView.do {
-            $0.image = .tvingLogo
-        }
-        
-        searchButton.do {
-            $0.setImage(.search, for: .normal)
-        }
-        
-        smallLogoButton.do {
-            $0.setImage(.vLogo, for: .normal)
-        }
-        
-        headerStackView.do {
-            $0.axis = .horizontal
-            $0.spacing = 10
-            $0.alignment = .center
-        }
-        
         mainMovieImageView.do {
             $0.image = .whatSurname
         }
@@ -72,8 +48,6 @@ final class MainView: BaseView {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(
-            logoImageView,
-            headerStackView,
             tabBarView,
             mainMovieImageView,
             todayTvingView,
@@ -84,10 +58,6 @@ final class MainView: BaseView {
             khLifeView,
             noticeView,
             footerView
-        )
-        headerStackView.addArrangedSubviews(
-            searchButton,
-            smallLogoButton
         )
     }
     
@@ -101,30 +71,8 @@ final class MainView: BaseView {
             $0.width.equalTo(scrollView.frameLayoutGuide)
         }
         
-        logoImageView.snp.makeConstraints{
-            $0.top.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.width.equalTo(191)
-            $0.height.equalTo(78)
-        }
-        
-        searchButton.snp.makeConstraints{
-            $0.width.height.equalTo(30)
-            $0.top.equalToSuperview()
-        }
-        
-        smallLogoButton.snp.makeConstraints{
-            $0.width.height.equalTo(30)
-            $0.top.equalToSuperview()
-        }
-        
-        headerStackView.snp.makeConstraints{
-            $0.centerY.equalTo(logoImageView.snp.centerY)
-            $0.leading.equalTo(logoImageView.snp.trailing).offset(103)
-        }
-        
         tabBarView.snp.makeConstraints{
-            $0.top.equalTo(logoImageView.snp.bottom)
+            $0.top.equalToSuperview().inset(10)
             $0.centerX.equalToSuperview()
         }
         

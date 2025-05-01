@@ -28,6 +28,12 @@ final class MainViewController: UIViewController {
         setActions()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setNavigationBar()
+    }
+    
     // MARK: - Functions
     
     private func setActions() {
@@ -37,5 +43,47 @@ final class MainViewController: UIViewController {
     @objc
     private func changeUnderLinePosition(_ segment: UISegmentedControl) {
         rootView.tabBarView.changeUnderLinePosition()
+    }
+    
+    @objc
+    private func homeButtonDidTap() {
+        
+    }
+}
+
+extension MainViewController {
+    
+    func setNavigationBar() {
+        
+        let barAppearance = UINavigationBarAppearance()
+        barAppearance.backgroundColor = .black
+        navigationController?.navigationBar.standardAppearance = barAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = barAppearance
+        
+        let tvingLogoImageView = UIImageView(image: .tvingLogo)
+        tvingLogoImageView.contentMode = .scaleAspectFit
+        tvingLogoImageView.snp.makeConstraints {
+            $0.width.equalTo(120)
+            $0.height.equalTo(78)
+        }
+        let tvingButton = UIBarButtonItem(customView: tvingLogoImageView)
+        
+        
+        let searchImageView = UIImageView(image: .search)
+        searchImageView.contentMode = .scaleAspectFit
+        searchImageView.snp.makeConstraints {
+            $0.width.height.equalTo(30)
+        }
+        let searchButton = UIBarButtonItem(customView: searchImageView)
+        
+        let smallLogoImageView = UIImageView(image: .vLogo)
+        smallLogoImageView.contentMode = .scaleAspectFit
+        smallLogoImageView.snp.makeConstraints{
+            $0.width.height.equalTo(30)
+        }
+        let smallLogoButton = UIBarButtonItem(customView: smallLogoImageView)
+        
+        navigationItem.leftBarButtonItem = tvingButton
+        navigationItem.rightBarButtonItems = [smallLogoButton, searchButton]
     }
 }
