@@ -70,7 +70,7 @@ final class RealtimeLiveView: BaseView {
         collectionView.snp.makeConstraints{
             $0.top.equalTo(titleLabel.snp.bottom).offset(9)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(118)
+            $0.height.equalTo(138)
         }
     }
     
