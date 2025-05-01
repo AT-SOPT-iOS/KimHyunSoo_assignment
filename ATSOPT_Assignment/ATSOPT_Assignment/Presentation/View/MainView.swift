@@ -25,7 +25,9 @@ final class MainView: BaseView {
     let todayTvingView = TodayTvingView()
     let realtimeLiveView = RealtimeLiveView()
     let realtimeMovieView = RealtimeMovieView()
-//    let KHLifeView = KHLifeView()
+    let baseballView = BaseballView()
+    let sponsorView = SponsorView()
+    let khLifeView = KHLifeView()
     
     let noticeView = NoticeView()
     
@@ -46,7 +48,7 @@ final class MainView: BaseView {
     
     override func setStyle() {
         self.do {
-            $0.backgroundColor = .black
+            $0.backgroundColor = .clear
         }
         
         logoImageView.do {
@@ -119,7 +121,9 @@ final class MainView: BaseView {
             todayTvingView,
             realtimeLiveView,
             realtimeMovieView,
-//            KHLifeView,
+            baseballView,
+            sponsorView,
+            khLifeView,
             noticeView,
             askingLabel,
             termsLabel,
@@ -186,26 +190,38 @@ final class MainView: BaseView {
         }
         
         realtimeLiveView.snp.makeConstraints{
-            $0.top.equalTo(todayTvingView.snp.bottom).offset(52)
+            $0.top.equalTo(todayTvingView.snp.bottom).offset(10)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(200)
+            $0.height.equalTo(170)
         }
         
         realtimeMovieView.snp.makeConstraints{
             $0.top.equalTo(realtimeLiveView.snp.bottom).offset(18)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(172)
+            $0.height.equalTo(192)
         }
         
-//        KHLifeView.snp.makeConstraints{
-//            $0.top.equalTo(realtimeLiveView.snp.bottom).offset(30)
-//            $0.height.equalTo(200)
-//            $0.horizontalEdges.equalToSuperview()
-//        }
+        baseballView.snp.makeConstraints{
+            $0.top.equalTo(realtimeMovieView.snp.bottom).offset(20)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(50)
+        }
+        
+        sponsorView.snp.makeConstraints{
+            $0.top.equalTo(baseballView.snp.bottom).offset(28)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(40)
+        }
+        
+        khLifeView.snp.makeConstraints{
+            $0.top.equalTo(sponsorView.snp.bottom).offset(25)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(126)
+        }
         
         noticeView.snp.makeConstraints{
-            $0.top.equalTo(realtimeMovieView.snp.bottom).offset(23)
-            $0.centerX.equalToSuperview()
+            $0.top.equalTo(khLifeView.snp.bottom).offset(23)
+            $0.horizontalEdges.equalToSuperview().inset(14)
         }
         
         askingLabel.snp.makeConstraints{
