@@ -47,7 +47,7 @@ final class MainViewController: UIViewController {
     
     @objc
     private func homeButtonDidTap() {
-        
+        // 추후.. 연결
     }
 }
 

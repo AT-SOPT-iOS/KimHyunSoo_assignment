@@ -104,10 +104,12 @@ final class WelcomeViewController: UIViewController {
             idDelegate?.bindID(id: id)
         }
         
+        let mainViewController = MainViewController()
+        
         if self.navigationController == nil {
             self.dismiss(animated: true)
         } else {
-            self.navigationController?.popViewController(animated: true)
+            navigationController?.pushViewController(mainViewController, animated: true)
         }
     }
 }
