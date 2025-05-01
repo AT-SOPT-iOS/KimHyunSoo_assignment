@@ -22,6 +22,11 @@ final class MainView: BaseView {
     
     let tabBarView = TabBarView()
     
+    let todayTvingView = TodayTvingView()
+    let realtimeLiveView = RealtimeLiveView()
+    let realtimeMovieView = RealtimeMovieView()
+//    let KHLifeView = KHLifeView()
+    
     let noticeView = NoticeView()
     
     let logoImageView = UIImageView()
@@ -111,6 +116,10 @@ final class MainView: BaseView {
             headerStackView,
             tabBarView,
             mainMovieImageView,
+            todayTvingView,
+            realtimeLiveView,
+            realtimeMovieView,
+//            KHLifeView,
             noticeView,
             askingLabel,
             termsLabel,
@@ -133,8 +142,8 @@ final class MainView: BaseView {
         }
         
         contentView.snp.makeConstraints{
-            $0.edges.equalTo(scrollView)
-            $0.width.equalTo(scrollView)
+            $0.edges.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
         }
         
         logoImageView.snp.makeConstraints{
@@ -166,11 +175,36 @@ final class MainView: BaseView {
         
         mainMovieImageView.snp.makeConstraints{
             $0.top.equalTo(tabBarView.snp.bottom).offset(10)
-            $0.height.equalTo(400)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(500)
         }
         
+        todayTvingView.snp.makeConstraints{
+            $0.top.equalTo(mainMovieImageView.snp.bottom).offset(9)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(204)
+        }
+        
+        realtimeLiveView.snp.makeConstraints{
+            $0.top.equalTo(todayTvingView.snp.bottom).offset(52)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(200)
+        }
+        
+        realtimeMovieView.snp.makeConstraints{
+            $0.top.equalTo(realtimeLiveView.snp.bottom).offset(18)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(172)
+        }
+        
+//        KHLifeView.snp.makeConstraints{
+//            $0.top.equalTo(realtimeLiveView.snp.bottom).offset(30)
+//            $0.height.equalTo(200)
+//            $0.horizontalEdges.equalToSuperview()
+//        }
+        
         noticeView.snp.makeConstraints{
-            $0.bottom.equalToSuperview().inset(198)
+            $0.top.equalTo(realtimeMovieView.snp.bottom).offset(23)
             $0.centerX.equalToSuperview()
         }
         
