@@ -38,6 +38,7 @@ final class MainViewController: UIViewController {
     
     private func setActions() {
         self.rootView.tabBarView.segmentControl.addTarget(self, action: #selector(changeUnderLinePosition), for: .valueChanged)
+        self.rootView.realtimeLiveView.moreButton.addTarget(self, action: #selector(moreButtonDidTap), for: .touchUpInside)
     }
     
     @objc
@@ -48,6 +49,12 @@ final class MainViewController: UIViewController {
     @objc
     private func homeButtonDidTap() {
         // 추후.. 연결
+    }
+    
+    @objc
+    private func moreButtonDidTap() {
+        let movieListViewController = MovieListViewController()
+        navigationController?.pushViewController(movieListViewController, animated: true)
     }
 }
 

@@ -17,7 +17,7 @@ final class RealtimeLiveView: BaseView {
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     private let titleLabel = UILabel()
-    private let moreButton = UIButton()
+    let moreButton = UIButton()
     
     private let realtimeLiveList = RealtimeLiveModel.dummy()
     
