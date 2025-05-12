@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6C2A28A72DAFE563004EC21D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6C2A28A62DAFE563004EC21D /* SnapKit */; };
+		6C5FE2C52DC2251D009DCE51 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 6C5FE2C42DC2251D009DCE51 /* Then */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C2A28A72DAFE563004EC21D /* SnapKit in Frameworks */,
+				6C5FE2C52DC2251D009DCE51 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = ATSOPT_Assignment;
 			packageProductDependencies = (
 				6C2A28A62DAFE563004EC21D /* SnapKit */,
+				6C5FE2C42DC2251D009DCE51 /* Then */,
 			);
 			productName = ATSOPT_Assignment;
 			productReference = 6C2A26BD2DAFD715004EC21D /* ATSOPT_Assignment.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				6C2A28A52DAFE563004EC21D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				6C5FE2C32DC2251D009DCE51 /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6C2A26BE2DAFD715004EC21D /* Products */;
@@ -149,6 +153,8 @@
 /* Begin XCBuildConfiguration section */
 		6C2A26D12DAFD716004EC21D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 6C2A26BF2DAFD715004EC21D /* ATSOPT_Assignment */;
+			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -352,6 +358,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		6C5FE2C32DC2251D009DCE51 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -359,6 +373,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6C2A28A52DAFE563004EC21D /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		6C5FE2C42DC2251D009DCE51 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6C5FE2C32DC2251D009DCE51 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
