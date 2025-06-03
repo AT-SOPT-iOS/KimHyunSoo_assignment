@@ -6,67 +6,36 @@
 //
 
 import UIKit
-
-import SnapKit
-import Then
+import SwiftUI
 
 final class MainViewController: UIViewController {
-    
-    // MARK: - Property
-    
-    private let rootView = MainView()
-    
-    // MARK: - LifeCycle
-    
-    override func loadView() {
-        view = rootView
-    }
-    
+
+    private let hostingController = UIHostingController(rootView: MainView())
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setActions()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+        setupUI()
         setNavigationBar()
     }
-    
-    // MARK: - Functions
-    
-    private func setActions() {
-        self.rootView.tabBarView.segmentControl.addTarget(self, action: #selector(changeUnderLinePosition), for: .valueChanged)
-        self.rootView.realtimeLiveView.moreButton.addTarget(self, action: #selector(moreButtonDidTap), for: .touchUpInside)
-    }
-    
-    @objc
-    private func changeUnderLinePosition(_ segment: UISegmentedControl) {
-        rootView.tabBarView.changeUnderLinePosition()
-    }
-    
-    @objc
-    private func homeButtonDidTap() {
-        // 추후.. 연결
-    }
-    
-    @objc
-    private func moreButtonDidTap() {
-        let movieListViewController = MovieListViewController()
-        navigationController?.pushViewController(movieListViewController, animated: true)
-    }
-}
 
-extension MainViewController {
-    
-    func setNavigationBar() {
-        
+    private func setupUI() {
+        addChild(hostingController)
+        view.addSubview(hostingController.view)
+
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        hostingController.didMove(toParent: self)
+    }
+
+    private func setNavigationBar() {
         let barAppearance = UINavigationBarAppearance()
         barAppearance.backgroundColor = .black
         navigationController?.navigationBar.standardAppearance = barAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = barAppearance
-        
+
         let tvingLogoImageView = UIImageView(image: .tvingLogo)
         tvingLogoImageView.contentMode = .scaleAspectFit
         tvingLogoImageView.snp.makeConstraints {
@@ -74,23 +43,113 @@ extension MainViewController {
             $0.height.equalTo(78)
         }
         let tvingButton = UIBarButtonItem(customView: tvingLogoImageView)
-        
-        
+
         let searchImageView = UIImageView(image: .search)
         searchImageView.contentMode = .scaleAspectFit
         searchImageView.snp.makeConstraints {
             $0.width.height.equalTo(30)
         }
         let searchButton = UIBarButtonItem(customView: searchImageView)
-        
+
         let smallLogoImageView = UIImageView(image: .vLogo)
         smallLogoImageView.contentMode = .scaleAspectFit
-        smallLogoImageView.snp.makeConstraints{
+        smallLogoImageView.snp.makeConstraints {
             $0.width.height.equalTo(30)
         }
         let smallLogoButton = UIBarButtonItem(customView: smallLogoImageView)
-        
+
         navigationItem.leftBarButtonItem = tvingButton
         navigationItem.rightBarButtonItems = [smallLogoButton, searchButton]
     }
 }
+
+
+//import UIKit
+//
+//import SnapKit
+//import Then
+//
+//final class MainViewController: UIViewController {
+//    
+//    // MARK: - Property
+//    
+//    private let rootView = MainView()
+//    
+//    // MARK: - LifeCycle
+//    
+//    override func loadView() {
+//        view = rootView
+//    }
+//    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        
+//        setActions()
+//    }
+//    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        
+//        setNavigationBar()
+//    }
+//    
+//    // MARK: - Functions
+//    
+//    private func setActions() {
+//        self.rootView.tabBarView.segmentControl.addTarget(self, action: #selector(changeUnderLinePosition), for: .valueChanged)
+//        self.rootView.realtimeLiveView.moreButton.addTarget(self, action: #selector(moreButtonDidTap), for: .touchUpInside)
+//    }
+//    
+//    @objc
+//    private func changeUnderLinePosition(_ segment: UISegmentedControl) {
+//        rootView.tabBarView.changeUnderLinePosition()
+//    }
+//    
+//    @objc
+//    private func homeButtonDidTap() {
+//        // 추후.. 연결
+//    }
+//    
+//    @objc
+//    private func moreButtonDidTap() {
+//        let movieListViewController = MovieListViewController()
+//        navigationController?.pushViewController(movieListViewController, animated: true)
+//    }
+//}
+//
+//extension MainViewController {
+//    
+//    func setNavigationBar() {
+//        
+//        let barAppearance = UINavigationBarAppearance()
+//        barAppearance.backgroundColor = .black
+//        navigationController?.navigationBar.standardAppearance = barAppearance
+//        navigationController?.navigationBar.scrollEdgeAppearance = barAppearance
+//        
+//        let tvingLogoImageView = UIImageView(image: .tvingLogo)
+//        tvingLogoImageView.contentMode = .scaleAspectFit
+//        tvingLogoImageView.snp.makeConstraints {
+//            $0.width.equalTo(120)
+//            $0.height.equalTo(78)
+//        }
+//        let tvingButton = UIBarButtonItem(customView: tvingLogoImageView)
+//        
+//        
+//        let searchImageView = UIImageView(image: .search)
+//        searchImageView.contentMode = .scaleAspectFit
+//        searchImageView.snp.makeConstraints {
+//            $0.width.height.equalTo(30)
+//        }
+//        let searchButton = UIBarButtonItem(customView: searchImageView)
+//        
+//        let smallLogoImageView = UIImageView(image: .vLogo)
+//        smallLogoImageView.contentMode = .scaleAspectFit
+//        smallLogoImageView.snp.makeConstraints{
+//            $0.width.height.equalTo(30)
+//        }
+//        let smallLogoButton = UIBarButtonItem(customView: smallLogoImageView)
+//        
+//        navigationItem.leftBarButtonItem = tvingButton
+//        navigationItem.rightBarButtonItems = [smallLogoButton, searchButton]
+//    }
+//}

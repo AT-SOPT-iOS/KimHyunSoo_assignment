@@ -7,7 +7,8 @@
 
 import UIKit
 
-struct RealtimeMovieModel {
+struct RealtimeMovieModel: Identifiable {
+    let id = UUID()
     let image: UIImage
 }
 

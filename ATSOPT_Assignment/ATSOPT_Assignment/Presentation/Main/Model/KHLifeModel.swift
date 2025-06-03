@@ -7,7 +7,8 @@
 
 import UIKit
 
-struct KHLifeModel {
+struct KHLifeModel: Identifiable {
+    let id = UUID()
     let image: UIImage
 }
 
