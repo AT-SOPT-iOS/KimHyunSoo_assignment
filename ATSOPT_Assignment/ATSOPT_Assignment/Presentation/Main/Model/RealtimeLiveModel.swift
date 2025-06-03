@@ -7,7 +7,8 @@
 
 import UIKit
 
-struct RealtimeLiveModel {
+struct RealtimeLiveModel: Identifiable {
+    let id = UUID()
     let image: UIImage
     let rank: String
     let title: String

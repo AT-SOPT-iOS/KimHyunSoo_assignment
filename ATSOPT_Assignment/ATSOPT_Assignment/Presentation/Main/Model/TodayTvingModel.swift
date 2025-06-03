@@ -7,7 +7,8 @@
 
 import UIKit
 
-struct TodayTvingModel {
+struct TodayTvingModel:Identifiable {
+    let id = UUID()
     let rank: String
     let image: UIImage
 }

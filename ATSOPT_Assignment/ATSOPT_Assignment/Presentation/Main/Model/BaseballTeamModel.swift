@@ -7,7 +7,8 @@
 
 import UIKit
 
-struct BaseballTeamModel {
+struct BaseballTeamModel:Identifiable {
+    let id = UUID()
     let image: UIImage
 }
 

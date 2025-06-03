@@ -7,7 +7,8 @@
 
 import UIKit
 
-struct SponsorModel {
+struct SponsorModel: Identifiable {
+    let id = UUID()
     let image: UIImage
 }
 
